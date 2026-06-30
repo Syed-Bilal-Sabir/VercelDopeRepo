@@ -1,13 +1,59 @@
 {
-  "buildCommand": "dotnet publish -c Release -o publish",
-  "outputDirectory": "publish/wwwroot",
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "installCommand": null,
   "rewrites": [
     {
-      "source": "/((?!_framework|_content|css|js|images|games|videos|favicon\\.ico|index\\.html).*)",
+      "source": "/games/:path*",
+      "destination": "/games/:path*"
+    },
+    {
+      "source": "/videos/:path*",
+      "destination": "/videos/:path*"
+    },
+    {
+      "source": "/_framework/:path*",
+      "destination": "/_framework/:path*"
+    },
+    {
+      "source": "/_content/:path*",
+      "destination": "/_content/:path*"
+    },
+    {
+      "source": "/css/:path*",
+      "destination": "/css/:path*"
+    },
+    {
+      "source": "/js/:path*",
+      "destination": "/js/:path*"
+    },
+    {
+      "source": "/Images/:path*",
+      "destination": "/Images/:path*"
+    },
+    {
+      "source": "/((?!.*\\.).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/_framework/(.*)",
+      "headers": [
+        {
+          "key": "Content-Encoding",
+          "value": "identity"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "Vary",
+          "value": ""
+        }
+      ]
+    },
     {
       "source": "/_framework/(.*\\.js)",
       "headers": [
@@ -16,8 +62,16 @@
           "value": "application/javascript"
         },
         {
+          "key": "Content-Encoding",
+          "value": "identity"
+        },
+        {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "no-store"
+        },
+        {
+          "key": "Vary",
+          "value": ""
         }
       ]
     },
@@ -29,53 +83,68 @@
           "value": "application/wasm"
         },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/_framework/(.*\\.dat)",
-      "headers": [
+          "key": "Content-Encoding",
+          "value": "identity"
+        },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/_framework/(.*)",
-      "headers": [
+          "value": "no-store"
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "key": "Vary",
+          "value": ""
         }
       ]
     },
     {
-      "source": "/games/(.*\\.js)",
+      "source": "/games/(.*)/Build/(.*\\.loader\\.js)",
       "headers": [
         {
           "key": "Content-Type",
           "value": "application/javascript"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/games/(.*\\.wasm)",
+      "source": "/games/(.*)/Build/(.*\\.framework\\.js)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/games/(.*)/Build/(.*\\.wasm)",
       "headers": [
         {
           "key": "Content-Type",
           "value": "application/wasm"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
     {
-      "source": "/games/(.*\\.data)",
+      "source": "/games/(.*)/Build/(.*\\.data)",
       "headers": [
         {
           "key": "Content-Type",
           "value": "application/octet-stream"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     },
