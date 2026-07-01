@@ -399,17 +399,13 @@ section, header, footer {
 
     /*------your console video placeholder------*/
 
-.Console-placeholder {
-    position: relative; /* container defines bounds */
-    width: 150px; /* set desired container size */
-    height: 150px; /* square to match video */
-    overflow: hidden; /* hide overflow */
+.your-box {
+    position: relative;
+    overflow: hidden;
 }
 
-    .Console-placeholder video {
-        width: 100%; /* video scales to container */
-        height: 100%; /* video scales to container */
-        object-fit: contain; /* show full video without cropping */
-        display: block; /* removes inline spacing issues */
+    .your-box video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* crops to fill — change to "contain" to letterbox */
     }
-
